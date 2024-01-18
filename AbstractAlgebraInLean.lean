@@ -1,1 +1,2 @@
-def hello := "world"
+import AbstractAlgebraInLean.Common
+import AbstractAlgebraInLean.Basic.Defs
