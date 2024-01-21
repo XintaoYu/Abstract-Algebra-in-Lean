@@ -46,8 +46,8 @@ lemma aux2 (h₁ : a * c = 1) (h₂ : b * c = 1) : a = b := by
 lemma aux3 (h₁ : c * a = 1) (h₂ : c * b =1) : a = b := by
   rw [← mul_one a, ← h₂, ← mul_assoc a, aux1 c a h₁, one_mul b]
 
-theorem inv_def  (h : a * b = 1) : a = b⁻¹ := aux2 a b⁻¹ b h (mul_left_inv b)
-theorem inv_def' (h : a * b = 1) : b = a⁻¹ := aux3 b a⁻¹ a h (mul_right_inv₁ a)
+theorem inv_eq_of_mul  (h : a * b = 1) : a = b⁻¹ := aux2 a b⁻¹ b h (mul_left_inv b)
+theorem inv_eq_of_mul' (h : a * b = 1) : b = a⁻¹ := aux3 b a⁻¹ a h (mul_right_inv₁ a)
 
 theorem inv_of_inv : (a⁻¹)⁻¹ = a := aux2 a⁻¹⁻¹ a a⁻¹ (mul_left_inv a⁻¹) (mul_right_inv₁ a)
 
@@ -73,8 +73,8 @@ theorem add_right_neg₁ : a + -a = (0 : G) := by
     rw [add_assoc a, add_left_neg a, add_zero a, add_left_neg (a + -a)]
   rw [← h, add_assoc (a + -a), ← add_assoc (-(a + -a)), add_left_neg (a + -a), zero_add (a + -a)]
 
-theorem neg_def (h : a + b = 0) : b = -a := sorry
-theorem neg_def' (h : a + b = 0) : a = -b := sorry
+theorem neg_eq_of_add (h : a + b = 0) : b = -a := sorry
+theorem neg_eq_of_add' (h : a + b = 0) : a = -b := sorry
 
 theorem neg_of_neg : -(-a) = a := sorry
 
