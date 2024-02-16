@@ -82,3 +82,5 @@ theorem add_right_cancel₁ (h : a + c = b + c) : a = b := sorry
 theorem add_left_cancel₁ (h : c + a = c + b) : a = b := sorry
 
 end AddGroup₁
+
+
