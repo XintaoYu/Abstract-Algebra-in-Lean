@@ -1,2 +1,1 @@
-import AbstractAlgebraInLean.Common
-import AbstractAlgebraInLean.Basic.Defs
+import AbstractAlgebraInLean.Lab.lab0
