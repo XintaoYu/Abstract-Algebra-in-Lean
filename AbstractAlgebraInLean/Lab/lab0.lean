@@ -17,7 +17,7 @@ import Mathlib.Tactic
 
 example : 1 + 1 = 2 := rfl
 
--- example : 1 + 1 = Nat.add 1 1 := by rfl
+-- example : 1 + 1 = Nat.add 1 1 := rfl
 -- example : Nat.add 1 1 = Nat.succ (Nat.succ Nat.zero) := rfl
 -- example : 2 = Nat.succ (Nat.succ Nat.zero) := rfl
 
@@ -25,16 +25,16 @@ inductive Nat' where
   | zero : Nat'
   | succ (n : Nat'): Nat'
 
-notation "α" => Nat'.succ (Nat'.zero)
-notation "β" => Nat'.succ (Nat'.succ (Nat'.zero))
+def one' : Nat' := Nat'.succ Nat'.zero
+def two' : Nat' := Nat'.succ (Nat'.succ Nat'.zero)
 
 def Nat'.add (n k : Nat') : Nat' :=
   match k with
   | Nat'.zero => n
   | Nat'.succ k' => Nat'.succ  (Nat'.add n k')
 
-example: Nat'.add α α = β := rfl
--- #eval Nat'.add α α = β
+example: Nat'.add one' one' = two' := rfl
+-- #eval Nat'.add one' one' = two'
 
 
 #check Nat.dvd_trans
@@ -72,4 +72,3 @@ example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
 
 example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
   ring
-
