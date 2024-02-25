@@ -74,6 +74,7 @@ example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
 example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
   ring
 
+<<<<<<< HEAD
 
 --如何证明不等式
 --证明只含有数字的不等式
@@ -161,3 +162,6 @@ theorem aux : min a b + c ≤ min (a + c) (b + c) := by
   apply min_le_left--证明min a b + c ≤ b + c
   apply add_le_add_right
   apply min_le_right
+=======
+example : 1 + 2  = 3 := rfl
+>>>>>>> 0248c2b2d9ebbe7977bfb3b605d650a0e1617a87
