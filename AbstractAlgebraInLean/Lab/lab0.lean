@@ -80,7 +80,7 @@ example : 2 + 1 < 5 := by
   norm_num   --使用norm_num完成对命题的证明
 
 
-section
+
 variable (a b c d e f : ℝ)
 open Real
 variable (h : a ≤ b) (h' : b ≤ c)
@@ -91,7 +91,6 @@ variable (h : a ≤ b) (h' : b ≤ c)
 #check (le_trans h : b ≤ c → a ≤ c)
 #check (le_trans h h' : a ≤ c)
 
-end
 
 example (x y z : ℝ) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z := by
   apply le_trans--apply作用在一个proof上，这个proof的结果要和当前的目标相同
@@ -100,9 +99,6 @@ example (x y z : ℝ) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z := by
 
 example (x : ℝ) : x ≤ x := by
   apply le_refl x
-
-variable (a b c d e f : ℝ)
-open Real
 
 example (h₀ : a ≤ b) (h₁ : b < c) (h₂ : c ≤ d) (h₃ : d < e) : a < e := by
   linarith
@@ -160,7 +156,7 @@ example : min a b = min b a := by
     apply min_le_right
     apply min_le_left
 
-theorem aux : min a b + c ≤ min (a + c) (b + c) := by
+example : min a b + c ≤ min (a + c) (b + c) := by
   apply le_min--通过这个tactic将goal转变为min a b + c ≤ a + c和min a b + c ≤ b + c
   apply add_le_add_right--先对第一个goal进行证明
   apply min_le_left--证明min a b + c ≤ b + c
