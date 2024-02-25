@@ -74,8 +74,6 @@ example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
 example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
   ring
 
-<<<<<<< HEAD
-
 --如何证明不等式
 --证明只含有数字的不等式
 example : 2 + 1 < 5 := by
@@ -96,7 +94,7 @@ variable (h : a ≤ b) (h' : b ≤ c)
 end
 
 example (x y z : ℝ) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z := by
-  apply le_trans
+  apply le_trans--apply作用在一个proof上，这个proof的结果要和当前的目标相同
   · apply h₀
   apply h₁
 
@@ -112,7 +110,7 @@ example (h₀ : a ≤ b) (h₁ : b < c) (h₂ : c ≤ d) (h₃ : d < e) : a < e 
 example (h : a ≤ b) : exp a ≤ exp b := by
   apply exp_le_exp.mpr
   exact h
---apply作用在一个proof上，这个proof的结果要和当前的目标相同
+--exact作用在一个和当前目标相同的proof上来结束证明
 --mp表示从左边推右边的对应的proof，即 exp_le_exp.mp {x y : \R} : rexp x <= rexp y -> x <= y
 --.mpr表示从右边推左边的对应的proof，即 exp_le_exp.mpr {x y : \R} : x <= y -> rexp x <
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by
@@ -149,6 +147,12 @@ example : |a| - |b| ≤ |a - b| := by
   exact abs_sub_abs_le_abs_sub a b
 
 --min与max的证明
+
+#check (min_le_left a b : min a b ≤ a)
+#check (min_le_right a b : min a b ≤ b)
+#check (le_min : c ≤ a → c ≤ b → c ≤ min a b)
+
+
 example : min a b = min b a := by
   apply le_antisymm--通过这个tactic将goal转变为min a b ≤ min b a和min b a ≤ min a b
   repeat--重复使用一下tactic
@@ -162,6 +166,3 @@ theorem aux : min a b + c ≤ min (a + c) (b + c) := by
   apply min_le_left--证明min a b + c ≤ b + c
   apply add_le_add_right
   apply min_le_right
-=======
-example : 1 + 2  = 3 := rfl
->>>>>>> 0248c2b2d9ebbe7977bfb3b605d650a0e1617a87
