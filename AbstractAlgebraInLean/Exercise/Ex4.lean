@@ -1,6 +1,5 @@
 import Mathlib.GroupTheory.Subgroup.Basic
 import Mathlib.Data.Set.Basic
-import Mathlib.Deprecated.Subgroup
 import Mathlib.Tactic
 
 -- Let H K be the subgroups of an abelian group of G
@@ -9,7 +8,7 @@ variable {α : Type}[CommGroup G](H K : Subgroup G)
 def HK  :=
   {hk | ∃ h ∈ H, ∃ k ∈ K, hk = h * k}
 -- Prove that HK is a subgroup of G
-def instHK :Subgroup G where
+def subgroupHK :Subgroup G where
   carrier := HK H K
   -- Prove HK is closed under multiplication
   mul_mem' := by
@@ -59,4 +58,3 @@ def instHK :Subgroup G where
       · exact Subgroup.inv_mem K hk₁
         -- Since G is an abelian group, h₁⁻¹ * k₁⁻¹ = (h₁ * k₁)⁻¹
       · simp [ha₁, mul_comm]
-
