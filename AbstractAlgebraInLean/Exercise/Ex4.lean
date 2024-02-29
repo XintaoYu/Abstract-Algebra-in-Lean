@@ -13,7 +13,7 @@ def subgroupHK :Subgroup G where
   -- Prove HK is closed under multiplication
   mul_mem' := by
     intro a b ha hb
-    simp [HK]; simp [HK] at ha; simp [HK] at hb
+    simp only [HK]; simp only [HK] at ha; simp only [HK] at hb
     -- If a b ∈ HK, then a = h₁ * k₁, b = h₂ * k₂, where h₁ h₂ ∈ H, k₁ k₂ ∈ K
     rcases ha with ⟨h₁, hh₁,k₁, hk₁, ha₁⟩
     rcases hb with ⟨h₂, hh₂,k₂, hk₂, hb₁⟩
@@ -26,12 +26,12 @@ def subgroupHK :Subgroup G where
       constructor
       · exact Subgroup.mul_mem K hk₁ hk₂
         -- Since G is an abelian group, h₁ * h₂ * (k₁ * k₂) = h₁ * k₁ * (h₂ * k₂) = a * b
-      · simp [ha₁, hb₁]
+      · simp only [ha₁, hb₁]
         exact mul_mul_mul_comm h₁ k₁ h₂ k₂
   -- Prove that 1 is an element of HK
   one_mem' := by
     -- Expand the definition of HK
-    simp [HK]
+    simp only [HK]
     -- Use 1 in H since H is a subgroup of G
     use 1
     constructor
@@ -41,11 +41,11 @@ def subgroupHK :Subgroup G where
       constructor
       · exact Subgroup.one_mem K
         -- 1 = 1 * 1 is trival
-      · simp
+      · simp only [mul_one]
   -- Prove there exists inverse element in HK for every a ∈ HK
   inv_mem' := by
     intro a ha
-    simp [HK]; simp [HK] at ha
+    simp only [HK]; simp only [HK] at ha
     -- Let a = h₁ * k₁ where h₁ ∈ H, k₁ ∈ K
     rcases ha with ⟨h₁, hh₁, k₁, hk₁, ha₁⟩
     -- Have h₁⁻¹ ∈ H since H is a Group
@@ -57,4 +57,4 @@ def subgroupHK :Subgroup G where
       constructor
       · exact Subgroup.inv_mem K hk₁
         -- Since G is an abelian group, h₁⁻¹ * k₁⁻¹ = (h₁ * k₁)⁻¹
-      · simp [ha₁, mul_comm]
+      · rw [ha₁]; simp only [mul_inv_rev, mul_comm]
