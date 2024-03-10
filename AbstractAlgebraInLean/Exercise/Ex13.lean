@@ -18,8 +18,10 @@ example : (f a).Bijective := by
   --To prove f is surjective.
   · -- It suffices to show that every b is equal to f a .
     intro b
-    -- f (a⁻¹*b) = a * (a⁻¹ * b) = a * a⁻¹ * b = b
+    -- f (a⁻¹*b) =a * (a⁻¹ * b)
     use a⁻¹*b
     rw [f]
+    --a * (a⁻¹ * b)=a * a⁻¹ * b
     rw [← mul_assoc]
+    --a * a⁻¹ * b = 1 * b = b
     rw [mul_right_inv, one_mul]
