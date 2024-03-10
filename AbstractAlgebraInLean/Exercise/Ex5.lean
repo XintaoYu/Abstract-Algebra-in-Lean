@@ -35,3 +35,4 @@ IsCyclic G := by
       use 1
       simp only [Subgroup.zpowers_one_eq_bot, Subgroup.mem_bot]
       exact this
+
