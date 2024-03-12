@@ -418,7 +418,6 @@ example {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y := by
   contrapose!
   exact le_antisymm h
 
-\begin{minted}{lean}
 variable {x y : ℝ}
 
 example (h : y > x ^ 2) : y > 0 ∨ y < -1 := by
