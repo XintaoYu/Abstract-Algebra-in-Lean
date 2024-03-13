@@ -296,4 +296,157 @@ example : min a b + c ≤ min (a + c) (b + c) := by
   apply add_le_add_right
   apply min_le_right
 
+#check ∀ x : ℝ, 0≤ x → |x| = x
 
+#check ∀ x y ε : ℝ, 0 < ε → ε ≤ 1 → |x| < ε → |y| < ε → |x * y| < ε
+
+theorem my_lemma : ∀ x y ε : ℝ, 0 < ε → ε ≤ 1 → |x| < ε → |y| < ε → |x * y| < ε := by
+intro x y ε epos ele1 xlt ylt
+calc
+    |x * y|=|x| *|y| :=by apply abs_mul
+    _≤ |x| *ε :=by apply mul_le_mul ;linarith;linarith;apply abs_nonneg;apply abs_nonneg
+    _<1*ε :=by rw[mul_lt_mul_right epos];linarith
+    _=ε :=by rw[one_mul]
+
+def FnUb (f : ℝ  → ℝ ) (a : ℝ ) : Prop :=
+∀ x, f x ≤ a
+def FnLb (f : ℝ  → ℝ ) (a : ℝ ) : Prop :=
+∀ x, a ≤ f x
+
+example (hfa : FnUb f a) (hgb : FnUb g b) : FnUb (fun x ↦ f x + g x) (a + b) := by
+intro x
+dsimp
+apply add_le_add
+apply hfa
+apply hgb
+
+example (f : ℝ → ℝ) (h : Monotone f) : ∀ {a b}, a ≤ b → f a ≤ f b :=
+@h
+
+variable (f g : ℝ → ℝ)
+
+example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦  f x + g x := by
+intro a b aleb
+apply add_le_add
+apply mf aleb
+apply mg aleb
+
+example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
+use 5 / 2
+norm_num
+
+#check norm_num
+
+def FnHasUb (f : ℝ → ℝ) :=
+  ∃ a, FnUb f a
+
+def FnHasLb (f : ℝ → ℝ) :=
+  ∃ a, FnLb f a
+
+theorem fnUb_add {f g : ℝ → ℝ} {a b : ℝ} (hfa : FnUb f a) (hgb : FnUb g b) :
+    FnUb (fun x ↦ f x + g x) (a + b) :=
+  fun x ↦ add_le_add (hfa x) (hgb x)
+
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
+  rcases ubf with ⟨a, ubfa⟩
+  rcases ubg with ⟨b, ubgb⟩
+  use a + b
+  apply fnUb_add ubfa ubgb
+
+example : FnHasUb f → FnHasUb g → FnHasUb fun x ↦ f x + g x := by
+  rintro ⟨a, ubfa⟩ ⟨b, ubgb⟩
+  exact ⟨a + b, fnUb_add ubfa ubgb⟩
+
+variable (a b : ℝ)
+example (h : a < b) : ¬b < a := by
+  intro h'
+  have : a < a := lt_trans h h'
+  apply lt_irrefl a this
+
+example (h : ∀ a, ∃ x, f x > a) : ¬FnHasUb f := by
+  intro fnub
+  rcases fnub with ⟨a, fnuba⟩
+  rcases h a with ⟨x, hx⟩
+  have : f x ≤ a := fnuba x
+  linarith
+
+variable {α : Type*} (P : α → Prop) (Q : Prop)
+
+example (h : ¬∃ x, P x) : ∀ x, ¬P x := by
+  intro x hx
+  apply h
+  use x
+
+example (h : ∀ x, ¬P x) : ¬∃ x, P x := by
+  rintro ⟨x,hx⟩
+  exact h x hx
+
+example (h : ∃ x, ¬P x) : ¬∀ x, P x := by
+  intro h'
+  rcases h with ⟨x, nPx⟩
+  apply nPx
+  apply h'
+
+example (h : ¬∀ x, P x) : ∃ x, ¬P x := by
+  by_contra h'
+  apply h
+  intro x
+  show P x
+  by_contra h''
+  exact h' ⟨x, h''⟩
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  rcases h with ⟨h₀, h₁⟩
+  contrapose! h₁
+  apply le_antisymm h₀ h₁
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  have ⟨h₀, h₁⟩ := h
+  contrapose! h₁
+  exact le_antisymm h₀ h₁
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  intro h'
+  apply h.right
+  exact le_antisymm h.left h'
+
+example {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y := by
+  constructor
+  · contrapose!
+    rintro rfl
+    rfl
+  contrapose!
+  exact le_antisymm h
+
+variable {x y : ℝ}
+
+example (h : y > x ^ 2) : y > 0 ∨ y < -1 := by
+  left
+  linarith [pow_two_nonneg x]
+
+example (h : -y > x ^ 2 + 1) : y > 0 ∨ y < -1 := by
+  right
+  linarith [pow_two_nonneg x]
+
+example : x < |y| → x < y ∨ x < -y := by
+  rcases le_or_gt 0 y with h | h
+  · rw [abs_of_nonneg h]
+    intro h; left; exact h
+  . rw [abs_of_neg h]
+    intro h; right; exact h
+
+def ConvergesTo (s : ℕ → ℝ) (a : ℝ) :=
+  ∀ ε > 0, ∃ N, ∀ n ≥ N, |s n - a| < ε
+
+example : (fun x y : ℝ ↦ (x + y) ^ 2) = fun x y : ℝ ↦ x ^ 2 + 2 * x * y + y ^ 2 := by
+  ext
+  ring
+
+example (a b : ℝ) : |a| = |a - b + b| := by
+  congr
+  ring
+
+example {a : ℝ} (h : 1 < a) : a < a * a := by
+  convert (mul_lt_mul_right _).2 h
+  · rw [one_mul]
+  exact lt_trans zero_lt_one h
