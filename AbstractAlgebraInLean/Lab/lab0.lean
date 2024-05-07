@@ -198,8 +198,6 @@ example (a b : Nat) : (a + b) ^ 2 = a ^ 2 + 2 * a * b + b ^ 2 := by
 
 -- sorryc，将使lean暂时忽略一个命题的证明，并直接认为这个命题是正确的。这个tacitc主要用于布置习题，以免lean对于没有证明的命题报错。
 
-theorem hard : FermatLastTheorem :=
-  sorry
 
 
 -- apply?，这个tactic会令lean搜索tactic和定理的库，并给出证明建议。
@@ -263,7 +261,7 @@ example : |a| - |b| ≤ |a - b| :=
     _ ≤ |a - b| + |b| - |b| := by
       apply sub_le_sub_right
       apply abs_add
-    _ ≤ |a - b| := by rw [add_sub_cancel]
+    _ ≤ |a - b| := by rw [←add_sub, sub_self, add_zero]
 --或使用tactic ring简化计算
 example : |a| - |b| ≤ |a - b| := by
   have h₀  : |a| - |b| + |b| ≤ |a - b| + |b|--先暂时把goal转变为|a| - |b| + |b| ≤ |a - b| + |b|
@@ -313,7 +311,7 @@ def FnUb (f : ℝ  → ℝ ) (a : ℝ ) : Prop :=
 def FnLb (f : ℝ  → ℝ ) (a : ℝ ) : Prop :=
 ∀ x, a ≤ f x
 
-example (hfa : FnUb f a) (hgb : FnUb g b) : FnUb (fun x ↦ f x + g x) (a + b) := by
+example (f : ℝ → ℝ) (hfa : FnUb f a) (hgb : FnUb g b) : FnUb (fun x ↦ f x + g x) (a + b) := by
 intro x
 dsimp
 apply add_le_add
@@ -335,7 +333,6 @@ example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
 use 5 / 2
 norm_num
 
-#check norm_num
 
 def FnHasUb (f : ℝ → ℝ) :=
   ∃ a, FnUb f a

@@ -1,6 +1,6 @@
 import Mathlib.Data.ZMod.Basic
 import Mathlib.Data.Set.Card
-import Mathlib.GroupTheory.Subgroup.ZPowers
+import Mathlib.Algebra.Group.Subgroup.ZPowers
 import Mathlib.Data.Nat.Totient
 
 open Classical
@@ -30,7 +30,7 @@ example
         rw [Nat.coprime_iff_gcd_eq_one]
         rw [show ↑k * v = ((k * v.val):ℤ)   by simp, show (1:ZMod (p ^ r)) = (1 : ℤ) by simp ] at hk
         -- Since k * v and 1 are equal in ℤ/p ^ r ℤ, thus 1 - k * v can be divided by p ^ r.
-        rw [ZMod.int_cast_eq_int_cast_iff_dvd_sub (k * v.val) 1 (p ^ r)] at hk
+        rw [ZMod.intCast_eq_intCast_iff_dvd_sub (k * v.val) 1 (p ^ r)] at hk
         -- That means there exists an integer b that satisifes 1 - k * v = p ^ r * b.
         rcases hk with ⟨b, hb⟩
         simp at hb
@@ -83,10 +83,10 @@ example
           rw [show (1 : ZMod (p ^ r)) = (((1 : ℕ) : ℤ) : ZMod (p ^ r)) by simp ]
           -- Our goal is converted to prove a * v = a * v + b * p ^ r in ℤ/p ^ r ℤ.
           rw [this.symm]
-          simp only [ZMod.nat_cast_val, Int.cast_add, Int.cast_mul,
-            ZMod.int_cast_cast, ZMod.cast_id', id_eq, Int.cast_pow, Int.cast_ofNat]
+          simp only [ZMod.natCast_val, Int.cast_add, Int.cast_mul,
+            ZMod.intCast_cast, ZMod.cast_id', id_eq, Int.cast_pow, Int.cast_natCast]
           -- Since p ^ r is zero in G, then it is trivial.
-          rw [ZMod.nat_cast_self (p ^ r)]
+          rw [ZMod.natCast_self ↑(p ^ r)]
           simp [mul_comm]
         rw [mul_assoc, this]
         simp
