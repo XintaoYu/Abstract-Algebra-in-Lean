@@ -1,4 +1,4 @@
-import Mathlib.GroupTheory.Subgroup.Basic
+import Mathlib.Algebra.Group.Subgroup.Basic
 import Mathlib.Data.Set.Basic
 import Mathlib.Tactic
 
