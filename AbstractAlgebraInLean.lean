@@ -1,2 +1,8 @@
-import AbstractAlgebraInLean.Exercise
+import AbstractAlgebraInLean.Exercise.Ex1
+import AbstractAlgebraInLean.Exercise.Ex2
+import AbstractAlgebraInLean.Exercise.Ex3
+import AbstractAlgebraInLean.Exercise.Ex4
+import AbstractAlgebraInLean.Exercise.Ex5
+import AbstractAlgebraInLean.Exercise.Ex6
+import AbstractAlgebraInLean.Exercise.Ex13
 import AbstractAlgebraInLean.Aux

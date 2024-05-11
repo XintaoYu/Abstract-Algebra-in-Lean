@@ -7,19 +7,13 @@ PROJECT = AbstractAlgebraInLean
 all : build blueprint
 
 build:
-	(lake -Kenv=dev exe cache get && lake -Kenv=dev build && lake -Kenv=dev build ${PROJECT}:docs -R)
+	(lake exe cache get && lake build)
 
 blueprint: build
-	(cd blueprint && inv all && cp -r ../.lake/build/doc ./web/)
-
-blueprint-dev:
 	(cd blueprint && inv all)
 
 analyze:
 	(python3 blueprint/blueprint_auto.py -p ${PROJECT})
 
-serve: blueprint-dev analyze
+serve: blueprint
 	(cd blueprint && inv serve)
-
-update:
-	lake -Kenv=dev update -R
