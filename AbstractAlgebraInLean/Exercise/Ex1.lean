@@ -1,6 +1,5 @@
 import Mathlib.Data.Set.Basic
 
-section
 -- Suppose that * is a binary operation on a set S.
 variable {α : Type}(S : Set α)(f : α → α → α)
 --Let H = {a ∈ S|a * x = x * a for all x ∈ S}.
@@ -29,4 +28,3 @@ example
     _ = f a (f x b) := by rw [h₁ ha.1 hx hb.1]    -- a * x * b    =   a * (x * b)
     _ = f a (f b x) := by rw [hb.2 x hx]          -- a * (x * b)  =   a * (b * x)
     _ = f (f a b) x := by rw [← h₁ ha.1 hb.1 hx]  -- a * (b * x)  =   a * b * x
-end
