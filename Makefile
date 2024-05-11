@@ -2,7 +2,7 @@
 
 PROJECT = AbstractAlgebraInLean
 
-.PHONY: all build blueprint blueprint-dev analyze serve
+.PHONY: all build blueprint analyze serve
 
 all : build blueprint
 
