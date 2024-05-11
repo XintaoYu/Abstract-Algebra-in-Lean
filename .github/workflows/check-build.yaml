@@ -6,17 +6,8 @@ jobs:
         contents: read
         pages: write
         id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: DeterminateSystems/nix-installer-action@main
-        with:
-          extra-conf: |
-            accept-flake-config = true
-      #- uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: DeterminateSystems/flake-checker-action@main
       - name: Checkout Project
         uses: actions/checkout@v3
         with:
@@ -24,4 +15,6 @@ jobs:
           lfs: true
 
       - run: |
-          nix develop --command make build
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:4.0.0
+          ~/.elan/bin/lake exe cache get
+          ~/.elan/bin/lake build
