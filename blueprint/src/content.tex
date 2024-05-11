@@ -1,8 +1,8 @@
-\title{Demo Project}
+\title{Abstract Algebra in Lean}
 
 
-\home{https://XintaoYu.github.io/blueprint-template/}
-\github{https://github.com/XintaoYu/Abstract-Algebra-in-Lean}
+%\home{https://XintaoYu.github.io/blueprint-template/}
+%\github{https://github.com/XintaoYu/Abstract-Algebra-in-Lean}
 %\dochome{https://reaslab.github.io/blueprint-template/doc/}
 
 % \home{localhost:8080}
@@ -16,9 +16,76 @@
 
 
 
-\section{Example}
+\section{Exercise}
 
 % To avoid bibtex errors
 \nocite{*} % Delete this line if you have citations.
 
-Here you can use LaTex.
+\begin{theorem}[Exercise 1]\label{Ex1}
+  \leanok
+    Suppose that $*$ is an associative binary operation on a set $S$. Let
+    $$
+    H = \{a\in S | a * x = x * a \text{for all} x\in S\}
+    $$
+
+    Show that $H$ is under $*$. (We think of $H$ as consisting of all elements of $S$ that commute with every element in $S$.)
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}
+
+
+\begin{theorem}[Exercise 2]\label{Ex2}
+  \leanok
+    Are all groups of 4 elements commutative?
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}
+
+
+\begin{theorem}[Exercise 3]\label{Ex3}
+  \leanok
+    Show that if $G$ is a finite group with identity $e$ and with an even number of elements, then there is $a \ne e$ in $G$ such that $a * a = e$.
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}
+
+
+\begin{theorem}[Exercise 4]\label{Ex4}
+  \leanok
+    Show that if $H$ and $K$ are subgroups of an abelian group $G$, then
+    $$
+    \{hk|h \in H \text{and} k \in K\}
+    $$
+    is a subgroup of G.
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}
+
+\begin{theorem}[Exercise 5]\label{Ex5}
+  \leanok
+Show that a group with no proper nontrivial subgroups is cyclic.
+
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}
+
+\begin{theorem}[Exercise 6]\label{Ex6}
+  \leanok
+    Let $p$ be a prime number. Find the number of generators of the cyclic group $Z_{p^r}$ , where $r$ is an integer $\ge$ 1.
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}
+
+\begin{theorem}[Exercise 13]\label{Ex13}
+  \leanok
+    Let $G$ be a group and let $a$ be fixed element of $G$. Show that the map $\lambda_a: G\to G$, given by $\lambda_a(g)=ag$ for $g\in G$, is a permutation of the set $G$.
+\end{theorem}
+\begin{proof}
+  \leanok
+\end{proof}

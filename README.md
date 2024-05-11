@@ -11,11 +11,14 @@ First, fork this repository and clone your fork to your local. Then follow the c
 # git clone <fork-repo-url>
 
 cd Abstract-Algebra-in-Lean
+# If you have nix installed on your machine, use this.
+nix develop
 # Install the required toolchain
 elan install $(cat lean-toolchain)
 # Build the project
-make build
+make build # If you don't have nix, use lake exe cache get && lake build
 ```
+
 
 ## Propose new exercise
 
