@@ -1,0 +1,20 @@
+on:
+  pull_request:
+jobs:
+  build:
+    permissions:
+        contents: read
+        pages: write
+        id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+          lfs: true
+
+      - run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:4.0.0
+          ~/.elan/bin/lake exe cache get
+          ~/.elan/bin/lake build
