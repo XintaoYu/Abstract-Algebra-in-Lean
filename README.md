@@ -32,4 +32,4 @@ Your formalized solution to some exercise in issues should be stored in `Abstrac
 
 Please make sure your code can compile successfully before opening a PR. It would be better for one PR to solve only one issue.
 
-See https://XintaoYu.github.io/blueprint-template/ for more details.
+See https://xintaoyu.github.io/Abstract-Algebra-in-Lean/ for more details.
