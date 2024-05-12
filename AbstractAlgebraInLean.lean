@@ -5,4 +5,4 @@ import AbstractAlgebraInLean.Exercise.Ex4
 import AbstractAlgebraInLean.Exercise.Ex5
 import AbstractAlgebraInLean.Exercise.Ex6
 import AbstractAlgebraInLean.Exercise.Ex13
-import AbstractAlgebraInLean.Aux
+import AbstractAlgebraInLean.Auxiliary
